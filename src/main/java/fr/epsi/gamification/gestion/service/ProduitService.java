@@ -1,7 +1,11 @@
 package fr.epsi.gamification.gestion.service;
 
+import fr.epsi.gamification.gestion.beans.Categorie;
+import fr.epsi.gamification.gestion.beans.Fournisseur;
 import fr.epsi.gamification.gestion.beans.Produit;
 import fr.epsi.gamification.gestion.interfaces.WebServices;
+import fr.epsi.gamification.gestion.repository.CategorieRepository;
+import fr.epsi.gamification.gestion.repository.FournisseurRepository;
 import fr.epsi.gamification.gestion.repository.ProduitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +19,16 @@ public class ProduitService implements WebServices<Produit> {
     @Autowired
     private final ProduitRepository produitRepository;
 
-    public ProduitService(ProduitRepository produitRepository) {
+    @Autowired
+    private final FournisseurRepository fournisseurRepository;
+
+    @Autowired
+    private final CategorieRepository categorieRepository;
+
+    public ProduitService(ProduitRepository produitRepository, FournisseurRepository fournisseurRepository, CategorieRepository categorieRepository) {
         this.produitRepository = produitRepository;
+        this.fournisseurRepository = fournisseurRepository;
+        this.categorieRepository = categorieRepository;
     }
 
     @Override
@@ -56,5 +68,23 @@ public class ProduitService implements WebServices<Produit> {
     @Override
     public Produit getById(int id) {
         return produitRepository.findById(id).get();
+    }
+
+    // Liste des produit Livrer par un fournisseur grace à l'ID
+
+    public List<Produit> getProduitByFournisseur(int id_fournisseur)
+    {
+        Fournisseur fournisseur = fournisseurRepository.findById(id_fournisseur).get();
+
+        return produitRepository.findByFournisseur(fournisseur);
+    }
+
+    // Liste produit d'une categorie
+
+    public List<Produit> getProduitByCategorie(int ref_categorie)
+    {
+        Categorie categorie = categorieRepository.findById(ref_categorie).get();
+
+        return produitRepository.findByCategorie(categorie);
     }
 }

@@ -1,6 +1,7 @@
 package fr.epsi.gamification.gestion.controller;
 
 import fr.epsi.gamification.gestion.beans.Categorie;
+import fr.epsi.gamification.gestion.beans.Produit;
 import fr.epsi.gamification.gestion.service.CategorieService;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -52,4 +53,5 @@ public class CategorieController {
     {
         return categorieService.getById(ref_categorie);
     }
+
 }

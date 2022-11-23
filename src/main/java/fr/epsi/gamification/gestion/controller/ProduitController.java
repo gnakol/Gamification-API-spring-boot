@@ -54,4 +54,16 @@ public class ProduitController {
     {
         return produitService.getById(ref_produit);
     }
+
+    @GetMapping("getProduitByFournisseurID/{id_fournisseur}")
+    public List<Produit> getProduitByFournisseur(@Validated @PathVariable int id_fournisseur)
+    {
+        return produitService.getProduitByFournisseur(id_fournisseur);
+    }
+
+    @GetMapping("getProduitByCategorieID/{ref_categorie}")
+    public List<Produit> getProduitByCategorie(@Validated @PathVariable int ref_categorie)
+    {
+        return produitService.getProduitByCategorie(ref_categorie);
+    }
 }

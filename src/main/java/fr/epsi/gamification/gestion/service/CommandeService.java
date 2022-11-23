@@ -1,8 +1,12 @@
 package fr.epsi.gamification.gestion.service;
 
+import fr.epsi.gamification.gestion.beans.Client;
 import fr.epsi.gamification.gestion.beans.Commande;
+import fr.epsi.gamification.gestion.beans.Employe;
 import fr.epsi.gamification.gestion.interfaces.WebServices;
+import fr.epsi.gamification.gestion.repository.ClientRepository;
 import fr.epsi.gamification.gestion.repository.CommandeRepository;
+import fr.epsi.gamification.gestion.repository.EmployeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +18,16 @@ public class CommandeService implements WebServices<Commande> {
     @Autowired
     private final CommandeRepository commandeRepository;
 
-    public CommandeService(CommandeRepository commandeRepository) {
+    @Autowired
+    private final ClientRepository clientRepository;
+
+    @Autowired
+    private final EmployeRepository employeRepository;
+
+    public CommandeService(CommandeRepository commandeRepository, ClientRepository clientRepository, EmployeRepository employeRepository) {
         this.commandeRepository = commandeRepository;
+        this.clientRepository = clientRepository;
+        this.employeRepository = employeRepository;
     }
 
     @Override
@@ -54,5 +66,22 @@ public class CommandeService implements WebServices<Commande> {
     @Override
     public Commande getById(int id) {
         return commandeRepository.findById(id).get();
+    }
+
+    // Liste des commandes d'un client grace à son ID
+    public List<Commande> commandesByClientID(int id_client)
+    {
+        Client client = clientRepository.findById(id_client).get();
+
+        return  commandeRepository.findByClient(client);
+    }
+
+    // Liste des commandes gerer par un employe grace à son ID
+
+    public List<Commande> commandesByEmployeID(int id_employe)
+    {
+        Employe employe = employeRepository.findById(id_employe).get();
+
+        return  commandeRepository.findByEmploye(employe);
     }
 }

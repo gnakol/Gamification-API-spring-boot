@@ -55,4 +55,16 @@ public class CommandeController {
     {
         return commandeService.getById(ref_commande);
     }
+
+    @GetMapping("/commandesClientByID/{id_client}")
+    public List<Commande> commandesByClientID(@Validated @PathVariable int id_client)
+    {
+        return commandeService.commandesByClientID(id_client);
+    }
+
+    @GetMapping("/commandesEmployeByID/{id_employe}")
+    public List<Commande> commandesByEmployeID(@Validated @PathVariable int id_employe)
+    {
+        return commandeService.commandesByEmployeID(id_employe);
+    }
 }
