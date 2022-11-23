@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/produit")
+@RequestMapping("/gamif/produit")
 public class ProduitController {
 
     @Autowired

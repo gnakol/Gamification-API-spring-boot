@@ -11,7 +11,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/gamif/user")
 public class UserController {
 
     @Autowired
