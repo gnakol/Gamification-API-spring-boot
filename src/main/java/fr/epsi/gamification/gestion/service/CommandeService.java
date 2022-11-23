@@ -6,7 +6,6 @@ import fr.epsi.gamification.gestion.repository.CommandeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.security.GeneralSecurityException;
 import java.util.List;
 
 @Service

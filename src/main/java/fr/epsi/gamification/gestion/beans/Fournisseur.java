@@ -1,9 +1,11 @@
 package fr.epsi.gamification.gestion.beans;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Generated;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -28,4 +30,8 @@ public class Fournisseur {
 
     @Column(name = "pays")
     private String pays;
+
+    @OneToMany(mappedBy = "fournisseur", cascade = CascadeType.MERGE)
+    @JsonIgnore
+    private List<Produit> produits;
 }

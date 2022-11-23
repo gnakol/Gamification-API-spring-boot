@@ -12,15 +12,22 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_personne")
     private int id_user;
 
-    @Column(name = "user_name")
-    private String user_name;
+    @Column(name = "nom")
+    private String nom;
+
+    @Column(name = "prenom")
+    private String prenom;
+
+    @Column(name = "mail")
+    private String mail;
 
     @Column(name = "password")
     private String password;
 
-    @Column(name = "rights")
-    private int rights;
+    @Column(name = "role")
+    private String role;
 
 }

@@ -50,9 +50,11 @@ public class UserService implements WebServices<User> {
     public User update(int id, User e) {
         return userRepository.findById(id)
                 .map(p ->{
-                    p.setUser_name(e.getUser_name());
+                    p.setNom(e.getNom());
+                    p.setPrenom(e.getPrenom());
+                    p.setMail(e.getMail());
                     p.setPassword(e.getPassword());
-                    p.setRights(e.getRights());
+                    p.setRole(e.getRole());
                     return userRepository.save(p);
                 }).orElseThrow(() -> new RuntimeException("Utilisateur non trouver"));
     }

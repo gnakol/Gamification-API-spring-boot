@@ -1,8 +1,10 @@
 package fr.epsi.gamification.gestion.beans;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -11,6 +13,7 @@ public class Produit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "reference_produit")
     private int ref_produit;
 
     @Column(name = "nom")
@@ -25,11 +28,16 @@ public class Produit {
     @Column(name = "disponibilite")
     private String disponibilite;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "id_fournisseur")
     private Fournisseur fournisseur;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "reference_categorie")
     private Categorie categorie;
+
+    @OneToMany(mappedBy = "produit", cascade = CascadeType.MERGE)
+    @JsonIgnore
+    private List<DetailCommande> detailCommandes;
+
 }

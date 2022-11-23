@@ -38,6 +38,7 @@ public class ClientService implements WebServices<Client> {
                     p.setFonction(e.getFonction());
                     p.setVille(e.getVille());
                     p.setPays(e.getPays());
+                    p.setPhoto(e.getPhoto());
                     return clientRepository.save(p);
                 }).orElseThrow(()-> new RuntimeException("desoler ce client n'existe pas"));
     }

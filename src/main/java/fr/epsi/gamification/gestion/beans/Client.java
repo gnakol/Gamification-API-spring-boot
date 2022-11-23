@@ -1,9 +1,11 @@
 package fr.epsi.gamification.gestion.beans;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.Generated;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @Entity
@@ -28,6 +30,13 @@ public class Client {
 
     @Column(name = "pays")
     private String pays;
+
+    @Column(name = "photo")
+    private String photo;
+
+    @OneToMany(mappedBy = "client", cascade = CascadeType.MERGE)
+    @JsonIgnore
+    private List<Commande> commandes;
 
 
 }

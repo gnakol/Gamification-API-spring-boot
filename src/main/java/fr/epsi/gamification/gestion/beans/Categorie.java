@@ -11,6 +11,7 @@ public class Categorie {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "reference_categorie")
     private int reference_categorie;
 
     @Column(name = "nom")
