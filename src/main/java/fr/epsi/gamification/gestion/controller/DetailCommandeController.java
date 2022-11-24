@@ -26,11 +26,11 @@ public class DetailCommandeController {
         return detailCommandeService.liste();
     }
 
-    @GetMapping("/detailDuProduitNum/{ref_produit}")
+    /*@GetMapping("/detailDuProduitNum/{ref_produit}")
     public List<Produit> detail_par_produit(@Validated @PathVariable int ref_produit)
     {
         return detailCommandeService.detail_par_produit(ref_produit);
-    }
+    }*/
 
     @PostMapping("/ajouter")
     public String addDetail(@Validated @RequestBody DetailCommande detailCommande)
@@ -69,4 +69,48 @@ public class DetailCommandeController {
     {
         return detailCommandeService.getDetail(ref_commande, ref_produit);
     }
+
+    @GetMapping("/getDetailByCommandeRef/{ref_commande}")
+    public List<DetailCommande> getDetailByCommandeRef(@Validated @PathVariable int ref_commande)
+    {
+        return detailCommandeService.getDetailByCommandeRef(ref_commande);
+    }
+
+    @GetMapping("/getDetailByProduitRef/{ref_produit}")
+    public List<DetailCommande> getDetailByProduitRef(@Validated @PathVariable int ref_produit)
+    {
+        return detailCommandeService.getDetailByProduitRef(ref_produit);
+    }
+
+    @GetMapping("/listeProduitDispoParCommande/{ref_commande}")
+    public List<Produit> listeProduitDispoParCommande(@Validated @PathVariable int ref_commande)
+    {
+        return detailCommandeService.listeProduitDispo(ref_commande);
+    }
+
+    @DeleteMapping("removeDetail/{ref_commande}/{ref_produit}")
+    public String remove(@Validated @PathVariable int ref_commande, @PathVariable int ref_produit)
+    {
+        detailCommandeService.remove(ref_commande, ref_produit);
+
+        return "Detail commande supprimer avec succès";
+    }
+
+    @PatchMapping("/updateRemise/{ref_commande}/{ref_produit}")
+    public String updateRemise(@Validated @PathVariable int ref_commande, @PathVariable int ref_produit, @RequestBody DetailCommande detailCommande)
+    {
+        detailCommandeService.updateRemise(ref_commande, ref_produit, detailCommande);
+
+        return "Mise à jour de la remise effectuer avec succès";
+    }
+
+    @PatchMapping("updateQuantite/{ref_commande}/{ref_produit}")
+    public String updateQuantite(@Validated @PathVariable int ref_commande, @PathVariable int ref_produit, @RequestBody DetailCommande detailCommande)
+    {
+        detailCommandeService.updateQuantite(ref_commande, ref_produit, detailCommande);
+
+        return "Quantite de la commande modifier avec succès";
+    }
+
+
 }

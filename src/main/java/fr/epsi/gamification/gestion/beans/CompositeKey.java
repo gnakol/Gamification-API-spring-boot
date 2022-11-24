@@ -22,6 +22,8 @@ public class CompositeKey implements Serializable {
         this.ref_produit = ref_produit;
     }
 
+
+
     public int getRef_commande() {
         return ref_commande;
     }
@@ -37,4 +39,5 @@ public class CompositeKey implements Serializable {
     public void setRef_produit(int ref_produit) {
         this.ref_produit = ref_produit;
     }
+
 }

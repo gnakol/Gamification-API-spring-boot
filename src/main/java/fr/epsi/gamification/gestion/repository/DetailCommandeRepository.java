@@ -14,5 +14,9 @@ public interface DetailCommandeRepository extends JpaRepository<DetailCommande, 
 
     List<DetailCommande> findByCommande(Commande commande);
 
-    List<Produit> findByProduit(Produit produit);
+    //List<Produit> findByProduit(Produit produit);
+
+    List<DetailCommande> findByProduit(Produit produit);
+
+
 }
