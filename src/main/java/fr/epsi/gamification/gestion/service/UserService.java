@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class UserService implements WebServices<User> {
@@ -70,5 +70,33 @@ public class UserService implements WebServices<User> {
     @Override
     public User getById(int id) {
         return userRepository.findById(id).get();
+    }
+
+
+    // Liste des user par role
+    public List<User> listeByRole(String role_user)
+    {
+        return userRepository.findByRole(role_user);
+    }
+
+    // Recuperer un user par email
+
+    public User getByEmail(String mail)
+    {
+        return userRepository.findByMail(mail);
+    }
+
+    // Trouver un user grace à son email(login) et mot de passe
+
+    public User connexion(User user)
+    {
+        User personne = this.getByEmail(user.getMail());
+
+        if (personne != null)
+        {
+            if (Objects.equals(user.getPassword(), personne.getPassword()))
+                return personne;
+        }
+        return null;
     }
 }

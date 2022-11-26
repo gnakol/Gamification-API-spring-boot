@@ -55,4 +55,26 @@ public class UserController {
     {
         return userService.getById(id_user);
     }
+
+    @GetMapping("/listeUserByRole/{role_user}")
+    public List<User> listeUserByRole(@Validated @PathVariable String role_user)
+    {
+        return userService.listeByRole(role_user);
+    }
+
+    @GetMapping("/getUserByMail/{mail}")
+    public User getUserByMail(@Validated @PathVariable String mail)
+    {
+        return userService.getByEmail(mail);
+    }
+
+    @PostMapping("/verifPassword")
+    public String verificationPassword(@Validated @RequestBody User user)
+    {
+        User user1 = userService.connexion(user);
+        if (user1 != null)
+            return "Mot de passde cohérent c'est bon";
+
+        return "attention les mots de passe sont pas identiques";
+    }
 }
